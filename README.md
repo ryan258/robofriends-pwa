@@ -44,6 +44,8 @@ jest - running this test is built into CRA via react-scripts
 
 ## Shapshot Testing
 
+**Include your snapshots in your git repos so all developers are sharing the same snapshots to test against**
+
 **Goes great with stateless components because then all we have to do is write a one-liner to run a snapshot test. Bases covered.**
 
 If a developer comes in a messes up the component, the output won't match the snapshot and will automatically fail.
@@ -77,3 +79,72 @@ Then add the following to the package.json file:
 ```
 
 To update your snapshot press 'u'
+
+## Code Coverage
+
+How do we know that the snapshot is fully testing the component?
+
+By generating a coverage report:
+
+```terminal
+npm test -- --coverage
+```
+
+## Handling Components that Map Other Components
+
+```js
+const CardList = ({ robots }) => {
+  return (
+    <div>
+      {robots.map((user, i) => {
+        return <Card key={i} id={robots[i].id} name={robots[i].name} email={robots[i].email} />
+      })}
+    </div>
+  )
+}
+```
+
+We need to mock up data for that component to use for testing by passing it in.
+
+```js
+it('should render CardList component', () => {
+  const mockRobots = [
+    {
+      id: 1,
+      name: 'Fritzy McGee',
+      email: 'fritzy@mcgee.com'
+    }
+  ]
+
+  expect(shallow(<CardList robots={mockRobots} />)).toMatchSnapshot()
+})
+```
+
+Now we can see our new snapshot
+
+```js
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CardList component 1`] = `
+<div>
+  <Card
+    email="fritzy@mcgee.com"
+    id={1}
+    key="0"
+    name="Fritzy McGee"
+  />
+</div>
+`
+```
+
+## Snapshot Testing w/ Stateful Components
+
+**see CounterButton component for implementation details**
+
+We can still do snapshot testing with components that have state.
+
+They're still components after all...
+
+simulate an event w/ .simulate()
+
+get state value with .state()
