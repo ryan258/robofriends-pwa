@@ -162,3 +162,21 @@ but we can also do it a simple way
 so to scoot around the whole provider, connect complexity we can simply export the <App> itself from app JS an import that to test with.
 
 **Always strive to make your tests easy!**
+
+## Testing Reducers
+
+**Reducers are pure functions and pure functions are a tester's dream! We just give them some sort of input and expect an output.**
+
+Reducers take an action and spit out the state. They are the controller/brain of the app.
+
+Alot of the logic is in the reducers. So if we cover them, we'll have a good chunk of test coverage squared away.
+
+- gotta import those constants
+- gotta import those reducers
+
+reducers take 2 things
+
+1. state
+2. action
+
+Redux allows us to have really nice tests and keeps things simple on the React side by just doing snapshot testing and simple Enzyme tests on pure functions.
