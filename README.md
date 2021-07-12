@@ -180,3 +180,11 @@ reducers take 2 things
 2. action
 
 Redux allows us to have really nice tests and keeps things simple on the React side by just doing snapshot testing and simple Enzyme tests on pure functions.
+
+## Testing Actions
+
+### We need dispatch
+
+It's an async so we need thunk middleware for it.
+
+**redux-mock-store** lets us create a fake testing store.
