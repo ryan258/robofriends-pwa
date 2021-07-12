@@ -148,3 +148,17 @@ They're still components after all...
 simulate an event w/ .simulate()
 
 get state value with .state()
+
+## Testing a Container Component
+
+if you're going to pass a store into your component you need to pass it all the redux stuff...
+
+this is crazy, but there's a tool meant to help out with this called **redux-mock-store**
+
+but we can also do it a simple way
+
+### the simple way
+
+so to scoot around the whole provider, connect complexity we can simply export the <App> itself from app JS an import that to test with.
+
+**Always strive to make your tests easy!**
